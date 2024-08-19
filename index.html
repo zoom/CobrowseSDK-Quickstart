@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + TS</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <h1>Demo</h1>
+  <input type="text" id="token" placeholder="Enter Token">
+  <button id="cb-btn">Start Cobrowse</button>
+  <button id="iframe-btn">Start Iframe</button>
+  <script>
+    const token = document.getElementById('token');
+    const cbBtn = document.getElementById('cb-btn');
+    const iframeBtn = document.getElementById('iframe-btn');
+
+    cbBtn.addEventListener('click', () => {
+      window.location.href = `cobrowse.html?token=${token.value}`;
+    });
+
+    iframeBtn.addEventListener('click', () => {
+      window.location.href = `iframe.html?token=${token.value}`;
+    });
+  </script>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

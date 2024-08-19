@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + TS</title>
+  <script>
+    (function (r, a, b, f, c, d) {
+      r[f] = r[f] || { init: function () { r.ZoomCobrowseSDKInitArgs = arguments } };
+      var fragment = a.createDocumentFragment(); function loadJs(url) { c = a.createElement(b); d = a.getElementsByTagName(b)[0]; c.async = false; c.src = url; fragment.appendChild(c); };
+      loadJs('https://zcb.zoomdev.us/static/resource/sdk/zwNwiHxETRenkL8HJAliPQ/js'); d.parentNode.insertBefore(fragment, d);
+    })(window, document, 'script', 'ZoomCobrowseSDK');
+
+    // start session
+    if (!(new URLSearchParams(document.location.search)).get('token')) {
+      alert('Please provide a valid token');
+      window.location.href = '/';
+    }
+
+    const settings = {};
+    ZoomCobrowseSDK.init(settings, function ({ success, session, error }) {
+      if (success) {
+        // ZoomCobrowseSDK is ready to use now
+        session.start({
+          sdkToken: (new URLSearchParams(document.location.search)).get('token')
+        });
+      } else {
+        console.log(error);
+      }
+    });
+  </script>
+
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+
+</html>
