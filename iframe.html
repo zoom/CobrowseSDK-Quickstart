@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite + TS</title>
+  <title>Cobrowse SDK Demo</title>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
   <script>
     const token = new URLSearchParams(document.location.search).get('token');
     const iframe = document.getElementById('iframe');
-    iframe.src = `https://zcb.zoomdev.us/sdkapi/zcb/frame-templates/desk?access_token=${token}`;
+    iframe.src = `https://dev-zcb.zoomdev.us/sdkapi/zcb/frame-templates/desk?access_token=${token}`;
   </script>
 </body>
 

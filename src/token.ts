@@ -1,5 +1,16 @@
 import { KJUR } from 'jsrsasign'
-// https://www.npmjs.com/package/jsrsasign
+
+const token = document.getElementById('token')! as HTMLInputElement;
+const cbBtn = document.getElementById('cb-btn')!;
+const iframeBtn = document.getElementById('iframe-btn')!;
+
+cbBtn.addEventListener('click', () => {
+  window.location.href = `cobrowse.html?token=${token.value}`;
+});
+
+iframeBtn.addEventListener('click', () => {
+  window.location.href = `iframe.html?token=${token.value}`;
+});
 
 function generateSignature() {
   const sdkKey = import.meta.env.VITE_ZOOM_COBROWSE_SDK_KEY;
@@ -23,8 +34,9 @@ function generateSignature() {
   const sHeader = JSON.stringify(oHeader)
   const sPayload = JSON.stringify(oPayload)
   const cobrowseJWT = KJUR.jws.JWS.sign('HS256', sHeader, sPayload, sdkSecret)
+  console.log(sdkKey);
+  console.log(sdkSecret);
   console.log(cobrowseJWT);
-  console.log(sdkKey, sdkSecret);
   return cobrowseJWT
 }
 
