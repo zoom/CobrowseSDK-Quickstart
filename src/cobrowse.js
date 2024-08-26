@@ -1,6 +1,16 @@
 const sdkKey = import.meta.env.VITE_ZOOM_COBROWSE_SDK_KEY;
+const token = new URLSearchParams(document.location.search).get("token");
 
-if (!new URLSearchParams(document.location.search).get("token")) {
+const settings = {
+  allowAgentAnnotation: true,
+  allowCustomerAnnotation: true,
+  piiMask: {
+    maskCssSelectors: ".hide-me",
+    maskType: "custom_input",
+  },
+};
+
+if (!token) {
   alert("Please provide a valid token");
   window.location.href = "/";
 }
@@ -19,20 +29,29 @@ if (!new URLSearchParams(document.location.search).get("token")) {
     c.src = url;
     fragment.appendChild(c);
   }
-  loadJs(`https://dev-zcb.zoomdev.us/static/resource/sdk/${sdkKey}/js`);
+  loadJs(`https://go-zcb.zoom.us/static/resource/sdk/${sdkKey}/js`);
   d.parentNode.insertBefore(fragment, d);
 })(window, document, "script", "ZoomCobrowseSDK");
 
 // start session
-const settings = {};
-
 ZoomCobrowseSDK.init(settings, function ({ success, session, error }) {
   console.log(session, success, error);
+  console.log(session.getSessionInfo());
+  session.on("pincode_updated", (payload) => {
+    console.log("pincode_updated", payload);
+    alert(payload.pinCode);
+  });
+  session.on("agent_joined", (payload) => {
+    console.log("agent_joined", payload);
+  });
+  session.on("session_started", (payload) => {
+    console.log("session_started", payload);
+  });
   if (success) {
     // ZoomCobrowseSDK is ready to use now
     console.log("success");
     session.start({
-      sdkToken: new URLSearchParams(document.location.search).get("token"),
+      sdkToken: token,
     });
   } else {
     console.log(error);

@@ -14,8 +14,9 @@
   </iframe>
   <script>
     const token = new URLSearchParams(document.location.search).get('token');
-    const iframe = document.getElementById('iframe');
-    iframe.src = `https://dev-zcb.zoomdev.us/sdkapi/zcb/frame-templates/desk?access_token=${token}`;
+    // const iframe = document.getElementById('iframe');
+    // iframe.src = `https://go-zcb.zoom.us/sdkapi/zcb/frame-templates/desk?access_token=${token}`;
+    document.location.href = `https://go-zcb.zoom.us/sdkapi/zcb/frame-templates/desk?access_token=${token}`;
   </script>
 </body>
 
