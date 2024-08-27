@@ -1,5 +1,12 @@
 const sdkKey = import.meta.env.VITE_ZOOM_COBROWSE_SDK_KEY;
+if (!sdkKey) {
+  alert("Please provide a valid sdk key");
+  window.location.href = "/";
+}
 const token = new URLSearchParams(document.location.search).get("token");
+const btn = document.getElementById("cb-btn");
+const codeContainer = document.getElementById("code");
+let sessionRef = null;
 
 const settings = {
   allowAgentAnnotation: true,
@@ -37,9 +44,10 @@ if (!token) {
 ZoomCobrowseSDK.init(settings, function ({ success, session, error }) {
   console.log(session, success, error);
   console.log(session.getSessionInfo());
+
   session.on("pincode_updated", (payload) => {
     console.log("pincode_updated", payload);
-    alert(payload.pinCode);
+    codeContainer.innerText = payload.pinCode;
   });
   session.on("agent_joined", (payload) => {
     console.log("agent_joined", payload);
@@ -47,13 +55,25 @@ ZoomCobrowseSDK.init(settings, function ({ success, session, error }) {
   session.on("session_started", (payload) => {
     console.log("session_started", payload);
   });
+
   if (success) {
     // ZoomCobrowseSDK is ready to use now
-    console.log("success");
-    session.start({
-      sdkToken: token,
-    });
+    console.log("success", success);
+    console.log(session.getSessionInfo()?.pinCode ?? "no");
+    sessionRef = session;
+    btn.disabled = false;
+    btn.innerText = "Cobrowse";
   } else {
     console.log(error);
   }
+});
+
+btn.addEventListener("click", () => {
+  if (!sessionRef) {
+    alert("Please wait...");
+    return;
+  }
+  sessionRef.start({
+    sdkToken: token,
+  });
 });
