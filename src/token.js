@@ -15,7 +15,7 @@ const iframeBtn = document.getElementById("iframe-btn");
 
 cbBtn.addEventListener("click", () => {
   const token = generateSignature(1);
-  window.location.href = `cobrowse.html?token=${token}`;
+  window.open(`cobrowse.html?token=${token}`, "_blank");
 });
 
 iframeBtn.addEventListener("click", () => {
