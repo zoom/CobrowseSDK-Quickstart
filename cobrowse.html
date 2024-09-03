@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cobrowse SDK Demo</title>
   <link rel="stylesheet" href="src/style.css" />
+  <title>Cobrowse SDK Demo</title>
   <script type="module">
     const sdkKey = import.meta.env.VITE_ZOOM_COBROWSE_SDK_KEY;
     (function (r, a, b, f, c, d) { r[f] = r[f] || { init: function () { r.ZoomCobrowseSDKInitArgs = arguments } }; var fragment = a.createDocumentFragment(); function loadJs(url) { c = a.createElement(b); d = a.getElementsByTagName(b)[0]; c["async"] = false; c.src = url; fragment.appendChild(c) } loadJs(`https://go-zcb.zoom.us/static/resource/sdk/${sdkKey}/js`); d.parentNode.insertBefore(fragment, d) })(window, document, "script", "ZoomCobrowseSDK");
@@ -16,9 +16,17 @@
 
 <body>
   <div id="app">
-    <h1>Demo</h1>
-    <input type="text" id="name" placeholder="Enter Name">
-    <input type="text" id="secret" placeholder="Enter Secret" class="hide-me">
+    <h2>Zoom Cobrowse SDK Demo</h2>
+    <h1>Customer Form</h1>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <input type="text" id="name" placeholder="Name">
+      <label>Name will be visible</label>
+    </div>
+    <br /><br />
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <input type="text" id="secret" placeholder="Secret" class="hide-me">
+      <label>Secret will be <b>hidden</b> for the agent</label>
+    </div>
     <br /><br />
     <p id="code"></p>
     <button id="cb-btn" disabled>Loading...</button>

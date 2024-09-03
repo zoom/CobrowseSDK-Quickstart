@@ -4,16 +4,24 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <link rel="stylesheet" href="src/style.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="src/style.css" />
   <title>Cobrowse SDK Demo</title>
 </head>
 
 <body>
   <div id="app">
-    <h1>Demo</h1>
-    <button id="cb-btn">Start Cobrowse</button>
-    <button id="iframe-btn">Start Iframe</button>
+    <h1>Zoom Cobrowse SDK Demo</h1>
+    <div style="display: flex; flex-direction: row; gap: 1rem;">
+      <div class="btn-container">
+        <button id="cb-btn">Customer</button>
+        <p>Access the Cobrowse SDK as a customer, you'll be sharing your browser content</p>
+      </div>
+      <div class="btn-container">
+        <button id="iframe-btn">Agent</button>
+        <p>Access the Cobrowse SDK as an agent, you'll be able to view the customer's browser content</p>
+      </div>
+    </div>
     <script type="module" src="./src/token.js"></script>
   </div>
 </body>
