@@ -10,8 +10,5 @@
   },
   "devDependencies": {
     "vite": "^5.4.1"
-  },
-  "dependencies": {
-    "jsrsasign": "^11.1.0"
   }
 }
