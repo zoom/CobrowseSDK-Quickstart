@@ -2,6 +2,8 @@
 
 Use of this sample app is subject to our [Terms of Use](https://explore.zoom.us/en/video-sdk-terms/).
 
+The Zoom Cobrowsing SDK enables users to share their web browsing experience with an organization without compromising privacy and security.
+
 ## Prerequisites:
 
 - Node LTS & NPM
