@@ -12,13 +12,11 @@ async function fetchToken(role) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ role: role }),
-      })
-    )
-      .json()
-      .catch((e) => {
+      }).catch((e) => {
         console.error(e);
         alert("Please provide a valid token url");
       })
+    ).json()
   ).token;
   console.log(token);
   return token;

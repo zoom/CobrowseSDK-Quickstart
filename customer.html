@@ -9,7 +9,7 @@
   <title>Cobrowse SDK Demo</title>
   <script type="module">
     const ZOOM_SDK_KEY = import.meta.env.VITE_ZOOM_SDK_KEY;
-    (function (r, a, b, f, c, d) { r[f] = r[f] || { init: function () { r.ZoomCobrowseSDKInitArgs = arguments } }; var fragment = a.createDocumentFragment(); function loadJs(url) { c = a.createElement(b); d = a.getElementsByTagName(b)[0]; c["async"] = false; c.src = url; fragment.appendChild(c) } loadJs(`https://zcb.zoom.us/static/resource/sdk/${ZOOM_SDK_KEY}/js`); d.parentNode.insertBefore(fragment, d) })(window, document, "script", "ZoomCobrowseSDK");
+    (function (r, a, b, f, c, d) { r[f] = r[f] || { init: function () { r.ZoomCobrowseSDKInitArgs = arguments } }; var fragment = a.createDocumentFragment(); function loadJs(url) { c = a.createElement(b); d = a.getElementsByTagName(b)[0]; c["async"] = false; c.src = url; fragment.appendChild(c) } loadJs(`https://us01-zcb.zoom.us/static/resource/sdk/${ZOOM_SDK_KEY}/js`); d.parentNode.insertBefore(fragment, d) })(window, document, "script", "ZoomCobrowseSDK");
   </script>
   <script type="module" src="/src/customer.js"></script>
 </head>
@@ -34,8 +34,7 @@
       <input type="text" id="secret" placeholder="Secret" class="hide-me">
       <label>Secret will be <b>hidden</b> from the agent</label>
     </div>
-    <br /><br />
-    <p id="code"></p>
+    <br />
     <button id="submit" disabled>Submit</button>
   </div>
 </body>

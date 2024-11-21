@@ -1,6 +1,5 @@
 const token = new URLSearchParams(document.location.search).get("token");
 const btn = document.getElementById("cb-btn");
-const codeContainer = document.getElementById("code");
 let sessionRef = null;
 
 const settings = {
@@ -16,8 +15,6 @@ ZoomCobrowseSDK.init(settings, function ({ success, session, error }) {
   if (success) {
     session.on("pincode_updated", (payload) => {
       console.log("pincode_updated", payload);
-      codeContainer.innerText = payload.pinCode;
-      btn.innerText = "Share the code with the agent";
     });
     sessionRef = session;
     btn.disabled = false;
