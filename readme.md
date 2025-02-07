@@ -12,7 +12,7 @@ Use of this sample app is subject to our [Terms of Use](https://explore.zoom.us/
 
 To get started, clone the repo:
 
-`git clone https://github.com/zoom/videosdk-web-helloworld.git`
+`git clone https://github.com/zoom/CobrowseSDK-Quickstart.git`
 
 ## Setup
 
