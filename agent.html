@@ -6,17 +6,48 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="src/style.css" />
+  <script type="module">
+    const ZOOM_SDK_KEY = import.meta.env.VITE_ZOOM_SDK_KEY;
+    (function (r, a, b, f, c, d) {
+      r[f] = r[f] || { init: function () { r.ZoomCobrowseAgentSDKInitArgs = arguments } };
+      var fragment = a.createDocumentFragment(); function loadJs(url) { c = a.createElement(b); d = a.getElementsByTagName(b)[0]; c.async = false; c.src = url; fragment.appendChild(c); };
+      loadJs(`https://us01-zcb.zoom.us/static/resource/sdk/${ZOOM_SDK_KEY}/agent/js`); d.parentNode.insertBefore(fragment, d);
+    })(window, document, 'script', 'ZoomCobrowseAgentSDK');
+  </script>
   <title>Cobrowse SDK Demo</title>
 </head>
 
-<body>
-  <iframe width="1024" height="768" src="" id="iframe"
-    allow="autoplay *; camera *; microphone *; display-capture *; geolocation *;">
-  </iframe>
+<body style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
+  <div style="display: flex; align-items: center; justify-content: center;">
+    <input type=" text" id="pinCode" placeholder="Enter pin code" />
+    <button id="start">Start</button>
+  </div>
   <script>
     const token = new URLSearchParams(document.location.search).get('token');
-    const iframe = document.getElementById('iframe');
-    iframe.src = `https://us01-zcb.zoom.us/sdkapi/zcb/frame-templates/desk?access_token=${token}`;
+    const startButton = document.getElementById('start');
+    startButton.addEventListener('click', () => {
+      ZoomCobrowseAgentSDK.init({}, function ({ success, session, error }) {
+        if (success) {
+          session.createAgentViewerEndpoint({
+            pinCode: document.getElementById('pinCode').value,
+            sdkToken: token
+          }, function ({ success, agentViewerUrl, error }) {
+            if (success) {
+              const iframe = document.createElement('iframe');
+              iframe.src = agentViewerUrl;
+              iframe.width = '800';
+              iframe.height = '600';
+              document.body.appendChild(iframe);
+            } else {
+              console.log(error)
+            }
+          })
+          session.on('session_ended', payload => {
+            console.log('session_ended', payload)
+          })
+        }
+      })
+    })
   </script>
 </body>
 

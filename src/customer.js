@@ -11,6 +11,10 @@ const settings = {
   },
 };
 
+// you can generate a pin code based on your business logic
+const pinCode = String(Math.floor(100 + Math.random() * 900));
+console.log("pinCode", pinCode);
+
 ZoomCobrowseSDK.init(settings, function ({ success, session, error }) {
   if (success) {
     session.on("pincode_updated", (payload) => {
@@ -29,9 +33,11 @@ const startSession = () => {
     alert("Please wait...");
     return;
   }
+
   btn.disabled = true;
   sessionRef.start({
     sdkToken: token,
+    customPinCode: pinCode,
   });
 };
 
