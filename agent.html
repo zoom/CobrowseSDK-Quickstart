@@ -6,18 +6,23 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="src/style.css" />
-  <title>Cobrowse SDK Demo</title>
+  <title>Cobrowse SDK Agent Demo</title>
 </head>
 
 <body>
-  <iframe width="1024" height="768" src="" id="iframe"
-    allow="autoplay *; camera *; microphone *; display-capture *; geolocation *;">
-  </iframe>
-  <script>
-    const token = new URLSearchParams(document.location.search).get('token');
-    const iframe = document.getElementById('iframe');
-    iframe.src = `https://us01-zcb.zoom.us/sdkapi/zcb/frame-templates/desk?access_token=${token}`;
-  </script>
+  <iframe
+    id="cb-iframe"
+    width="1024"
+    height="768"
+    src="https://us01-zcb.zoom.us/sdkapi/zcb/frame-templates/desk?access_token=COBROWSE_AGENT_TOKEN"
+    allow="autoplay *; camera *; microphone *; display-capture *; geolocation *;"></iframe>
+
+  <div style="margin: auto; display: flex; flex-direction: column; align-items: center;">
+    <h1>Cobrowse Agent Start</h1>
+    <button id="cb-agent-btn" style="width: 50%;">Click to join</button>
+    <div id="cb-root"></div>
+  </div>
+  <script type="module" src="/src/agent.js"></script>
 </body>
 
 </html>

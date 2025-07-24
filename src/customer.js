@@ -1,8 +1,10 @@
+import { ZoomCobrowseSDK } from '@zoom/cobrowsesdk/customer';
+
 const token = new URLSearchParams(document.location.search).get("token");
 const btn = document.getElementById("cb-btn");
-let sessionRef = null;
 
 const settings = {
+  appKey: import.meta.env.VITE_ZOOM_SDK_KEY,
   allowAgentAnnotation: true,
   allowCustomerAnnotation: true,
   piiMask: {
@@ -14,15 +16,12 @@ const settings = {
 const startSession = () => {
   ZoomCobrowseSDK.init(settings, function ({ success, session, error }) {
   if (success) {
-    session.on("pincode_updated", (payload) => {
-         console.log("pincode_updated", payload);
-       });
        btn.disabled = true;
-       btn.innerText = "Starting CoBrowse Session...";
        session.start({
+         customPinCode:'982734',
          sdkToken: token,
        });
-       btn.innerText = "Cobrowse";
+       btn.innerText = "Cobrowse Started";
      } else {
        console.log("ERROR", error);
      }   
