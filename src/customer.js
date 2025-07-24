@@ -11,27 +11,21 @@ const settings = {
   },
 };
 
-ZoomCobrowseSDK.init(settings, function ({ success, session, error }) {
+const startSession = () => {
+  ZoomCobrowseSDK.init(settings, function ({ success, session, error }) {
   if (success) {
     session.on("pincode_updated", (payload) => {
-      console.log("pincode_updated", payload);
-    });
-    sessionRef = session;
-    btn.disabled = false;
-    btn.innerText = "Cobrowse";
-  } else {
-    console.log(error);
-  }
-});
-
-const startSession = () => {
-  if (!sessionRef) {
-    alert("Please wait...");
-    return;
-  }
-  btn.disabled = true;
-  sessionRef.start({
-    sdkToken: token,
+         console.log("pincode_updated", payload);
+       });
+       btn.disabled = true;
+       btn.innerText = "Starting CoBrowse Session...";
+       session.start({
+         sdkToken: token,
+       });
+       btn.innerText = "Cobrowse";
+     } else {
+       console.log("ERROR", error);
+     }   
   });
 };
 
