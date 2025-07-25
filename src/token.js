@@ -5,7 +5,8 @@ if (!sdkKey) {
   alert("Please provide a valid sdk key and token url");
 }
 
-async function fetchToken(role) {
+export async function fetchToken(role) {
+  console.log("made it here")
   const token = (
     await (
       await fetch(serverUrl, {

@@ -10,17 +10,13 @@
 </head>
 
 <body>
-  <iframe
-    id="cb-iframe"
-    width="1024"
-    height="768"
-    src="https://us01-zcb.zoom.us/sdkapi/zcb/frame-templates/desk?access_token=COBROWSE_AGENT_TOKEN"
-    allow="autoplay *; camera *; microphone *; display-capture *; geolocation *;"></iframe>
+    <div
+    id="cb-root" 
+    style="margin: auto; display: none; align-items: center; width: 1024px; height: 768px"></div>
 
-  <div style="margin: auto; display: flex; flex-direction: column; align-items: center;">
-    <h1>Cobrowse Agent Start</h1>
+  <div id="btn-container" style="margin: auto; display: flex; flex-direction: column; align-items: center;">
+    <h1>Cobrowse Agent</h1>
     <button id="cb-agent-btn" style="width: 50%;">Click to join</button>
-    <div id="cb-root"></div>
   </div>
   <script type="module" src="/src/agent.js"></script>
 </body>

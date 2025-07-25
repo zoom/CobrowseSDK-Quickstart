@@ -1,7 +1,26 @@
 import { ZoomCobrowseSDK } from '@zoom/cobrowsesdk/customer';
+// import { fetchToken } from './token';
 
-const token = new URLSearchParams(document.location.search).get("token");
-const btn = document.getElementById("cb-btn");
+const serverUrl = import.meta.env.VITE_TOKEN_URL;
+
+export async function fetchToken(role) {
+  console.log("made it here")
+  const token = (
+    await (
+      await fetch(serverUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ role: role }),
+      }).catch((e) => {
+        console.error(e);
+        alert("Please provide a valid token url");
+      })
+    ).json()
+  ).token;
+  return token;
+}
+
+const token = await fetchToken(1);
 
 const settings = {
   appKey: import.meta.env.VITE_ZOOM_SDK_KEY,
@@ -13,7 +32,7 @@ const settings = {
   },
   allowSessionContinuation: {
         enable: true,
-        stateCookieKey: 'xyz',
+        stateCookieKey: 'sessionPersistenceCookie',
   },
   remoteAssist:{ 
     enable: true,
@@ -22,31 +41,18 @@ const settings = {
   }
 };
 
-const startSession = () => {
+
   ZoomCobrowseSDK.init(settings, ({success, session, error}) => {
   if (success) {
-       btn.disabled = true;
        const sessionInfo = session.getSessionInfo();
-
        if (sessionInfo.sessionStatus === 'session_recoverable'){        
          session.join();      
        } else {
-         session.start({
-           customPinCode:'982034',
-           sdkToken: token,
-         });
-         
-       btn.innerText = "Cobrowse Started";
+         session.join();       
       }
      } else {
        console.log("ERROR", error);
      }   
   });
-};
 
-if (!token) {
-  alert("Please provide a valid token");
-  window.location.href = "/";
-}
 
-if (btn) btn.addEventListener("click", startSession);

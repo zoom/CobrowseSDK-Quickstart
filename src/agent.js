@@ -1,35 +1,34 @@
 import { ZoomCobrowseAgentSDK } from '@zoom/cobrowsesdk/agent';
 
 const token = new URLSearchParams(document.location.search).get("token");
-const iframe = document.getElementById("cd-iframe");
-iframe.src = `https://us01-zcb.zoom.us/sdkapi/zcb/frame-templates/desk?access_token=${token}`;
 const btn = document.getElementById("cb-agent-btn");
-const el = document.getElementById("cb-root");
+const btnContainer = document.getElementById("btn-container");
+const cbRoot = document.getElementById("cb-root");
 
 const settings = {
     appKey: import.meta.env.VITE_ZOOM_SDK_KEY,
-    zoomAppRoot: el,
+    zoomAppRoot: cbRoot,
 };
 
 const joinSession = () => {
-  ZoomCobrowseAgentSDK.init(settings, function ({ success, sdkInfo, session, error }) {
-  console.log({sdkInfo})
-  if (success) {
-    btn.style.display = 'none';
-    session.createAgentViewerEndpoint({
-       pinCode:'982734',
-       sdkToken: token
-    }, function({ success, agentViewerUrl, error }){
-       if(success){
-         console.log(agentViewerUrl)
-       }else {
-         console.log(error)
-       }
-     });
-   } else {
-     console.log(error);
-   }
-  });
+  ZoomCobrowseAgentSDK.init(settings, ({success, session, error}) => {
+     if (success) {
+      const sessionInfo = session.getSessionInfo();
+  
+      if (sessionInfo.sessionStatus === 'session_recoverable') {
+        session.join();
+      } else {
+         btnContainer.style.display = 'none';
+         cbRoot.style.display = "flex";
+         session.join({
+            pinCode:'982034',
+            sdkToken: token
+         });
+        }
+      } else {
+        console.log(error);
+      }
+   });
 };
 
 if (!token) {
