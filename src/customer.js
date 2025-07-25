@@ -9,6 +9,10 @@ const settings = {
     maskCssSelectors: ".hide-me",
     maskType: "custom_input",
   },
+  multiTabSessionPersistence: {
+   enable: true,
+   stateCookieKey: 'xyz'    
+   }
 };
 
 const startSession = () => {
@@ -19,7 +23,7 @@ const startSession = () => {
        });
        btn.disabled = true;
        session.start({
-        customPinCode:'924342',  
+         customPinCode:'924342',  
          sdkToken: token,
        });
        btn.innerText = "Cobrowse Started";
