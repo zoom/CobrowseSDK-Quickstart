@@ -18,11 +18,11 @@ const startSession = () => {
          console.log("pincode_updated", payload);
        });
        btn.disabled = true;
-       btn.innerText = "Starting CoBrowse Session...";
        session.start({
+        customPinCode:'924342',  
          sdkToken: token,
        });
-       btn.innerText = "Cobrowse";
+       btn.innerText = "Cobrowse Started";
      } else {
        console.log("ERROR", error);
      }   
