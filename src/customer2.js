@@ -1,5 +1,3 @@
-
-const token = new URLSearchParams(document.location.search).get("token");
 const settings = {
   allowAgentAnnotation: true,
   allowCustomerAnnotation: true,
