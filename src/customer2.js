@@ -18,12 +18,6 @@ const settings = {
    }
 };
 
-ZoomCobrowseSDK.init(settings, function ({ success, session, error }) {
-  if (success) {
-    session.join();
-  } else {
-    console.log(error);
-  }   
-});
+ZoomCobrowseSDK.init(settings);
 
 
