@@ -34,3 +34,5 @@ agentButton.addEventListener("click", async () => {
   const token = await fetchToken(2);
   window.open(`agent.html?token=${token}`, "_blank");
 });
+
+export default fetchToken;

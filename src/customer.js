@@ -1,6 +1,6 @@
 const token = new URLSearchParams(document.location.search).get("token");
+const submitBtn = document.getElementById("submit");
 const btn = document.getElementById("cb-btn");
-let sessionRef = null;
 
 const settings = {
   allowAgentAnnotation: true,
@@ -12,7 +12,16 @@ const settings = {
   multiTabSessionPersistence: {
    enable: true,
    stateCookieKey: 'xyz'    
+   },
+   remoteAssist:{
+        enable: true,
+        enableCustomerConsent: true,
+        remoteAssistTypes: ['scroll_page'], 
    }
+};
+
+const handleSubmit = () => {
+  window.open(`http://localhost:5173/customer2.html?token=${token}`,'_blank')
 };
 
 const startSession = () => {
@@ -38,4 +47,5 @@ if (!token) {
   window.location.href = "/";
 }
 
+submitBtn.addEventListener("click", handleSubmit);
 btn.addEventListener("click", startSession);
