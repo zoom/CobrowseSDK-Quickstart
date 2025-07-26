@@ -11,15 +11,6 @@ const settings = {
     maskCssSelectors: ".hide-me",
     maskType: "custom_input",
   },
-  allowSessionContinuation: {
-        enable: true,
-        stateCookieKey: 'xyz',
-  },
-  remoteAssist:{ 
-    enable: true,
-    enableCustomerConsent: true,
-    remoteAssistTypes: ['scroll_page'], 
-  }
 };
 
 const startSession = () => {
