@@ -2,6 +2,8 @@
 
 Use of this sample app is subject to our [Terms of Use](https://explore.zoom.us/en/video-sdk-terms/).
 
+You can find the corresponding Developer Blog for this app [here](https://developers.zoom.us/blog/?category=cobrowse-sdk)
+
 ## Prerequisites:
 
 - Node LTS & NPM
